@@ -1,0 +1,657 @@
+
+ <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أخبار اليوم - موقع إخباري متكامل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-bar button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions a {
+            margin-left: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+            width: 100%;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* News Grid */
+        .section-title {
+            font-size: 1.8rem;
+            margin: 2rem 0 1.5rem;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        /* Sidebar */
+        .layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .sidebar-widget {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .widget-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .popular-news li {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .popular-news li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .popular-news a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        .popular-news a:hover {
+            color: var(--primary-color);
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--light-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-bar {
+                width: 60%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.8rem 0.5rem;
+            }
+            
+            .hero {
+                height: 300px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">أخبار اليوم</div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن أخبار...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="#"><i class="fas fa-user"></i> تسجيل الدخول</a>
+                    <a href="#"><i class="fas fa-bell"></i></a>
+                </div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">أخبار عاجلة</a></li>
+                    <li><a href="#">السياسة</a></li>
+                    <li><a href="#">الاقتصاد</a></li>
+                    <li><a href="#">الرياضة</a></li>
+                    <li><a href="#">التقنية</a></li>
+                    <li><a href="#">الصحة</a></li>
+                    <li><a href="#">فن وثقافة</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="news-category">أخبار عاجلة</span>
+                <h1>عنوان الخبر الرئيسي هنا مع تفاصيل مهمة تجذب القارئ</h1>
+                <p>وصف مختصر للخبر الرئيسي مع بعض التفاصيل المهمة التي تشجع القارئ على الضغط لقراءة المزيد من التفاصيل.</p>
+                <a href="#" class="btn">اقرأ المزيد</a>
+            </div>
+        </section>
+        
+        <div class="layout">
+            <!-- Main Content -->
+            <div class="main-content">
+                <h2 class="section-title">آخر الأخبار</h2>
+                
+                <div class="news-grid">
+                    <!-- News Card 1 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">السياسة</span>
+                            <h3 class="news-title">عنوان الخبر الأول هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ ساعتين</span>
+                                <span><i class="far fa-eye"></i> 1.2K</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 2 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">الاقتصاد</span>
+                            <h3 class="news-title">عنوان الخبر الثاني هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ 4 ساعات</span>
+                                <span><i class="far fa-eye"></i> 856</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 3 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">التقنية</span>
+                            <h3 class="news-title">عنوان الخبر الثالث هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ 6 ساعات</span>
+                                <span><i class="far fa-eye"></i> 1.5K</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 4 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">الرياضة</span>
+                            <h3 class="news-title">عنوان الخبر الرابع هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ 8 ساعات</span>
+                                <span><i class="far fa-eye"></i> 2.3K</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 5 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">الصحة</span>
+                            <h3 class="news-title">عنوان الخبر الخامس هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ 10 ساعات</span>
+                                <span><i class="far fa-eye"></i> 1.7K</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- News Card 6 -->
+                    <article class="news-card">
+                        <img src="https://via.placeholder.com/400x300" alt="صورة الخبر">
+                        <div class="news-content">
+                            <span class="news-category">فن وثقافة</span>
+                            <h3 class="news-title">عنوان الخبر السادس هنا مع بعض التفاصيل المهمة</h3>
+                            <p class="news-excerpt">وصف مختصر للخبر مع بعض التفاصيل التي تشد القارئ لقراءة المزيد من التفاصيل...</p>
+                            <div class="news-meta">
+                                <span><i class="far fa-clock"></i> منذ 12 ساعة</span>
+                                <span><i class="far fa-eye"></i> 945</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Popular News Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">الأكثر قراءة</h3>
+                    <ul class="popular-news">
+                        <li><a href="#">عنوان الخبر الأكثر قراءة الأول مع بعض التفاصيل</a></li>
+                        <li><a href="#">عنوان الخبر الأكثر قراءة الثاني مع بعض التفاصيل</a></li>
+                        <li><a href="#">عنوان الخبر الأكثر قراءة الثالث مع بعض التفاصيل</a></li>
+                        <li><a href="#">عنوان الخبر الأكثر قراءة الرابع مع بعض التفاصيل</a></li>
+                        <li><a href="#">عنوان الخبر الأكثر قراءة الخامس مع بعض التفاصيل</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">التصنيفات</h3>
+                    <ul class="popular-news">
+                        <li><a href="#">أخبار عاجلة <span>(24)</span></a></li>
+                        <li><a href="#">السياسة <span>(156)</span></a></li>
+                        <li><a href="#">الاقتصاد <span>(89)</span></a></li>
+                        <li><a href="#">الرياضة <span>(203)</span></a></li>
+                        <li><a href="#">التقنية <span>(76)</span></a></li>
+                        <li><a href="#">الصحة <span>(54)</span></a></li>
+                        <li><a href="#">فن وثقافة <span>(67)</span></a></li>
+                    </ul>
+                </div>
+                
+                <!-- Tags Widget -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">الكلمات الدلالية</h3>
+                    <div class="tags">
+                        <a href="#" class="tag">#السياسة</a>
+                        <a href="#" class="tag">#الأسهم</a>
+                        <a href="#" class="tag">#كورة</a>
+                        <a href="#" class="tag">#أبل</a>
+                        <a href="#" class="tag">#كورونا</a>
+                        <a href="#" class="tag">#أفلام</a>
+                        <a href="#" class="tag">#تيك_توك</a>
+                        <a href="#" class="tag">#سفر</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن الموقع</h3>
+                    <p>موقع أخبار اليوم يقدم آخر الأخبار المحلية والعالمية في جميع المجالات بسرعة ومصداقية.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>أقسام الموقع</h3>
+                    <ul>
+                        <li><a href="#">أخبار عاجلة</a></li>
+                        <li><a href="#">السياسة</a></li>
+                        <li><a href="#">الاقتصاد</a></li>
+                        <li><a href="#">الرياضة</a></li>
+                        <li><a href="#">التقنية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>النشرة البريدية</h3>
+                    <p>اشترك في نشرتنا البريدية ليصلك كل جديد</p>
+                    <form>
+                        <input type="email" placeholder="بريدك الإلكتروني" style="width: 100%; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 4px; border: 1px solid #ddd;">
+                        <button type="submit" class="btn" style="width: 100%;">اشترك الآن</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة © 2023 موقع أخبار اليوم</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
